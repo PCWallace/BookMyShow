@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="row">
+        <span class="rounded-circle"></span>
+        <span *ngFor="let date of dates" class="rounded-circle">
+            <span (click)="cityCall(date.dateId)" >{{date.dateOfBooking}}</span>
+          </span>
+    </div>
+</div>>
