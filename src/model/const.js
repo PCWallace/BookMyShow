@@ -1,1 +1,0 @@
-export const LOGIN_VERIFY_URL = 'localhost:8762/auth';
