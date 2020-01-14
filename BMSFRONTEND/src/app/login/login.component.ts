@@ -36,18 +36,27 @@ export class LoginComponent implements OnInit {
         });
         this.error = false;
         const res = this.http
-            .post('api/auth', {
-                username: formValues.username,
-                password: formValues.password
-            },{observe:'response'})
+            .post(
+                'api/auth',
+                {
+                    username: formValues.username,
+                    password: formValues.password
+                },
+                { observe: 'response' }
+            )
             .subscribe(
-                data =>{
-                  console.log(data.status)
+                (data: any) => {
+                    console.log(data.status);
+                    if (data.status === 200) {
+                        localStorage.setItem(
+                            'tokken',
+                            data.headers.get('Authorization')
+                        );
+                        this.router.navigate(['/home']);
+                    }
+                    console.log(data.status);
                 },
                 err => console.log(err)
             );
-        // } else {
-        //     this.error = true;
-        // }
     }
 }
