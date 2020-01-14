@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { Service } from './service';
+
 import { CitysListComponent } from './citys-list/citys-list.component';
 import { TheaterslistComponent } from './theaterslist/theaterslist.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +16,7 @@ import { PlacedorderviewComponent } from './placedorderview/placedorderview.comp
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CookieService } from 'ngx-cookie-service';
+import { RegistertheaterformComponent } from './registertheaterform/registertheaterform.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { CookieService } from 'ngx-cookie-service';
         LoginComponent,
         TheaterviewComponent,
         DateviewComponent,
-        PlacedorderviewComponent
+        PlacedorderviewComponent,
+        RegistertheaterformComponent
     ],
     imports: [
         BrowserModule,
@@ -35,7 +37,7 @@ import { CookieService } from 'ngx-cookie-service';
         HttpClientModule,
         ReactiveFormsModule
     ],
-    providers: [Service, CookieService],
+    providers: [ CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

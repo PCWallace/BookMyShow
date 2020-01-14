@@ -1,17 +1,16 @@
-import { Injectable } from "@angular/core";
-import { LoginComponent } from "../login/login.component";
+import { Injectable } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+    providedIn: 'root'
 })
 export class LoginService {
+    body$: Observable<any>;
 
-  body$: Observable<any>;
+    constructor(private login: LoginComponent) {}
 
-  constructor(private login: LoginComponent) {}
-
-  verify(userName: string, password: string): boolean {
-    return false;
-  }
+    verify(userName: string, password: string): boolean {
+        return false;
+    }
 }

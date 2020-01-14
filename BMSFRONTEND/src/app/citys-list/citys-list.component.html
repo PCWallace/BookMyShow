@@ -1,8 +1,9 @@
 
 <div class="container mt-1 h4">
   <div class="alert alert-primary text-center">Cities</div>
-  <span *ngFor="let city of cities" class="badge badge-pill badge-info m-2 p-3">
-    <span (click)="cityCall(city.cityId)" >{{city.cityName}}</span>
+  <span *ngFor="let city of cities" class="badge badge-pill badge-info m-2 p-3" style="cursor: pointer">
+    <span (click)="registerTheatreId(city.cityId); showForm=true" >{{city.cityName}}</span>
   </span>
 </div>
 
+<app-registertheaterform *ngIf="showForm" [city]="cityId"></app-registertheaterform>

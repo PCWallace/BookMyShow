@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { City } from 'src/model/City';
 import { Theater } from 'src/model/Theater';
-import { Injectable } from '@angular/core';
 
-@Injectable()
-export class Service {
+@Injectable({
+    providedIn: 'root'
+})
+export class CityService {
     cities: City[];
 
     constructor(public http: HttpClient) {
@@ -19,6 +21,6 @@ export class Service {
     }
 
     getAllTheatersForCity(id: string) {
-        return this.http.get<Theater[]>(`http://localhost:8083/theaters/${id}`);
+        return this.http.get<Theater[]>(`api/theaters/${id}`);
     }
 }

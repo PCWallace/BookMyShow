@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Service } from '../service';
 import { City } from 'src/model/City';
 import { Router } from '@angular/router';
+import { CityService } from '../services/city.service';
 
 @Component({
     selector: 'app-citys-list',
@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 export class CitysListComponent implements OnInit {
     title = 'BMSFRONTEND';
     cities: City[];
-    constructor(private service: Service, private router: Router) {}
+    showForm = false;
+    cityId: string;
+    constructor(private service: CityService, private router: Router) {}
 
     ngOnInit() {
         this.getAllCities();
@@ -25,8 +27,8 @@ export class CitysListComponent implements OnInit {
         });
     }
 
-    cityCall(id: string) {
-        console.log(id);
-        this.router.navigate([`citydata`], { state: { data: id } });
+    registerTheatreId(id: string) {
+        // console.log(id);
+        this.cityId = id;
     }
 }
