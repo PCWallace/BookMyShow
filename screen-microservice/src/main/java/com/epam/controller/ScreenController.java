@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epam.entity.Screen;
 import com.epam.service.ScreenServices;
 
 @RestController
-@RequestMapping(value = "/screens")
 public class ScreenController {
 	@Autowired
 	private ScreenServices screens;
@@ -25,7 +23,7 @@ public class ScreenController {
 		return screens.insert(dto);
 	}
 
-	@DeleteMapping(	value = "/{screenId}")
+	@DeleteMapping(value = "/{screenId}")
 	public boolean delete(@PathVariable String screenId) {
 		return screens.delete(screenId);
 	}

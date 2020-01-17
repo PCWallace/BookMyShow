@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table(name = "city")
-public class City {
+public class CityEntity {
 	@Id
 	private String cityId;
 
@@ -21,7 +21,7 @@ public class City {
 	@NotNull(message = "must contain city name")
 	private String cityName;
 
-	public City() {
+	public CityEntity() {
 		this.cityId = UUID.randomUUID().toString();
 	}
 

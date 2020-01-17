@@ -1,5 +1,7 @@
 package com.epam.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class TierServicesImpl implements TierService {
 	@Override
 	public Tier update(Tier dto) {
 		return tierRepository.save(dto);
+	}
+
+	@Override
+	public List<Tier> getAllTiers() {
+		return tierRepository.findAll();
 	}
 
 }

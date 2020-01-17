@@ -1,6 +1,9 @@
 package com.epam.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,11 @@ import com.epam.service.TierService;
 public class TierController {
 	@Autowired
 	private TierService tiers;
+
+	@GetMapping(value = "All")
+	public List<Tier> getAllTiers() {
+		return tiers.getAllTiers();
+	}
 
 	@PostMapping(value = "/tier")
 	public Tier insert(@RequestBody Tier dto) {

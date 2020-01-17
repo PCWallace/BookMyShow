@@ -27,11 +27,6 @@ public class Dates {
 		this.dateId = UUID.randomUUID().toString();
 	}
 
-	@Override
-	public String toString() {
-		return "Dates [dateId=" + dateId + ", dateOfShows=" + dateOfShows + "]";
-	}
-
 	public String getDateId() {
 		return dateId;
 	}
@@ -47,4 +42,10 @@ public class Dates {
 	public void setDateOfShows(Date dateOfShows) {
 		this.dateOfShows = dateOfShows;
 	}
+
+	@Override
+	public String toString() {
+		return "Dates [dateId=" + dateId + ", dateOfShows=" + dateOfShows + "]";
+	}
+	
 }

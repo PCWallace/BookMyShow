@@ -1,16 +1,18 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.City;
-import com.epam.exception.CityLayerException;
+import com.epam.dto.CityRequestDto;
+import com.epam.dto.CityResponseDto;
 
 public interface CityServices {
-	public List<City> getAll();
+	public List<CityResponseDto> getAll();
 
-	public City getCityById(String cityId) throws CityLayerException ;
+	public CityResponseDto getCityById(String cityId) throws SQLException;
 
-	public City insert(City dto);
+	public CityResponseDto insert(CityRequestDto dto) throws SQLException;
 
-	public boolean delete(String cityId) throws CityLayerException ;
+	public void delete(String cityId) throws SQLException;
+
 }

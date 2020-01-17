@@ -25,6 +25,9 @@ public class Seat {
 	@Column(name = "rowName")
 	private String rowName;
 
+	@Column(name = "tierId")
+	private String tierId;
+
 	@ManyToOne
 	@JoinColumn(name = "tierId", insertable = false, updatable = false)
 	private Tier tier;
@@ -35,6 +38,22 @@ public class Seat {
 
 	public String getSeatId() {
 		return seatId;
+	}
+
+	public String getTierId() {
+		return tierId;
+	}
+
+	public void setTierId(String tierId) {
+		this.tierId = tierId;
+	}
+
+	public Tier getTier() {
+		return tier;
+	}
+
+	public void setTier(Tier tier) {
+		this.tier = tier;
 	}
 
 	public void setSeatId(String seatId) {
@@ -59,7 +78,8 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Seat [seatId=" + seatId + ", rowNumber=" + rowNumber + ", rowName=" + rowName + ", tier=" + tier + "]";
+		return "Seat [seatId=" + seatId + ", rowNumber=" + rowNumber + ", rowName=" + rowName + ", tierId=" + tierId
+				+ ", tier=" + tier + "]";
 	}
 
 }

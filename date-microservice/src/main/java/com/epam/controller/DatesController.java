@@ -15,7 +15,6 @@ import com.epam.entity.Dates;
 import com.epam.service.DatesServices;
 
 @RestController
-@RequestMapping("/dates")
 public class DatesController {
 
 	@Autowired

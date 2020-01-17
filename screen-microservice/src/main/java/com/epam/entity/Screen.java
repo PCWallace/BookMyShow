@@ -2,8 +2,10 @@ package com.epam.entity;
 
 import java.util.UUID;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -31,9 +33,9 @@ public class Screen {
 		return screenId;
 	}
 
-	public void setScreenId(String screenId) {
-		this.screenId = screenId;
-	}
+	/*
+	 * public void setScreenId(String screenId) { this.screenId = screenId; }
+	 */
 
 	public String getTheaterId() {
 		return theaterId;
