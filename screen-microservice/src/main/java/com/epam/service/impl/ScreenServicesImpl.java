@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.Screen;
+import com.epam.dto.ScreenResponseDto;
+import com.epam.entity.ScreenEntity;
+import com.epam.mapper.ScreenMapper;
 import com.epam.repository.ScreenRepository;
 import com.epam.service.ScreenServices;
 
@@ -22,13 +24,12 @@ public class ScreenServicesImpl implements ScreenServices {
 	}
 
 	@Override
-	public Screen insert(Screen dto) {
+	public ScreenEntity insert(ScreenEntity dto) {
 		return screenRepository.save(dto);
 	}
 
 	@Override
-	public List<Screen> getAllScreens() {
-		return screenRepository.findAll();
+	public List<ScreenResponseDto> getAllScreens() {
+		return ScreenMapper.MAPPER.toScreenDtos(screenRepository.findAll());
 	}
-
 }

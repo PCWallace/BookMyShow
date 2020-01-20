@@ -1,11 +1,14 @@
 package com.epam.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.Dates;
+import com.epam.dto.DateRequestDto;
+import com.epam.dto.DateResponseDto;
+import com.epam.mapper.DateMapper;
 import com.epam.repository.DatesRepository;
 import com.epam.service.DatesServices;
 
@@ -16,24 +19,36 @@ public class DatesServicesImpl implements DatesServices {
 	private DatesRepository datesRepository;
 
 	@Override
-	public List<Dates> getAll() {
-		return datesRepository.findAll();
+	public List<DateResponseDto> getAll() {
+		return DateMapper.MAPPER.toDateDtos(datesRepository.findAll());
 	}
 
 	@Override
-	public Dates insert(Dates dto) {
-		return datesRepository.save(dto);
+	public DateResponseDto insert(DateRequestDto dto) throws SQLException {
+		DateResponseDto date;
+		try {
+			date = DateMapper.MAPPER.toDateDto(datesRepository.save(DateMapper.MAPPER.toDateyEntity(dto)));
+		} catch (Exception e) {
+			throw new SQLException();
+		}
+		return date;
 	}
 
 	@Override
-	public Dates delete(String dateId) {
-		datesRepository.deleteById(dateId);
-		return getDateByDateId(dateId);
+	public void delete(String dateId) throws SQLException {
+		try {
+			datesRepository.deleteById(dateId);
+		} catch (Exception e) {
+			throw new SQLException();
+		}
 	}
 
 	@Override
-	public Dates getDateByDateId(String dateId) {
-		return datesRepository.findByDateId(dateId);
+	public DateResponseDto getDateByDateId(String dateId) throws SQLException {
+		DateResponseDto date = DateMapper.MAPPER.toDateDto(datesRepository.findByDateId(dateId));
+		if (date == null)
+			throw new SQLException();
+		return date;
 	}
 
 }

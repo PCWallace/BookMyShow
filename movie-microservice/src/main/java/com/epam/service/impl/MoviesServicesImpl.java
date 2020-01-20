@@ -1,11 +1,14 @@
 package com.epam.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.Movie;
+import com.epam.dto.MovieRequestDto;
+import com.epam.dto.MovieResponseDto;
+import com.epam.mapper.MovieMapper;
 import com.epam.repository.MovieRepository;
 import com.epam.service.MovieServices;
 
@@ -16,31 +19,48 @@ public class MoviesServicesImpl implements MovieServices {
 	private MovieRepository movieRepository;
 
 	@Override
-	public List<Movie> getAll() {
-		return movieRepository.findAll();
+	public List<MovieResponseDto> getAll() {
+		return MovieMapper.MAPPER.toMovieDtos((movieRepository.findAll()));
 	}
 
 	@Override
-	public Movie getMovieById(String movieId) {
-		return movieRepository.findByMovieId(movieId);
+	public MovieResponseDto getMovieById(String movieId) throws SQLException {
+		MovieResponseDto movie = MovieMapper.MAPPER.toMovieDto(movieRepository.findByMovieId(movieId));
+		if (movie == null)
+			throw new SQLException();
+		return movie;
 	}
 
 	@Override
-	public Movie insert(Movie dto) {
-		return movieRepository.save(dto);
+	public MovieResponseDto insert(MovieRequestDto dto) throws SQLException {
+		MovieResponseDto movie;
+		try {
+			movie = MovieMapper.MAPPER.toMovieDto(movieRepository.save(MovieMapper.MAPPER.toMovieEntity(dto)));
+		} catch (Exception e) {
+			throw new SQLException();
+		}
+		return movie;
 	}
 
 	@Override
-	public Movie update(String movieId) {
-		Movie movie = getMovieById(movieId);
-		movie.setActive(0);
-		return movieRepository.save(movie);
+	public MovieResponseDto update(MovieResponseDto dto) throws SQLException {
+		MovieResponseDto movie;
+		try {
+			movie = MovieMapper.MAPPER.toMovieDto(movieRepository.save(MovieMapper.MAPPER.toMovieEntity(dto)));
+
+		} catch (Exception e) {
+			throw new SQLException();
+		}
+		return movie;
 	}
 
 	@Override
-	public Movie delete(String movieId) {
-		movieRepository.deleteById(movieId);
-		return getMovieById(movieId);
+	public void delete(String movieId) throws SQLException {
+		try {
+			movieRepository.deleteById(movieId);
+		} catch (Exception e) {
+			throw new SQLException();
+		}
 	}
 
 }

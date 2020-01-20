@@ -2,14 +2,14 @@ package com.epam.service;
 
 import java.util.List;
 
-import com.epam.entity.Seat;
+import com.epam.entity.SeatEntity;
 
 public interface SeatServices {
-	public List<Seat> insert(List<Seat> dto);
+	public List<SeatEntity> insert(List<SeatEntity> dto);
 
 	public boolean delteByScreenId(String screenId);
 	
-	public List<Seat> getSeatByScreen(String screenId);
+	public List<SeatEntity> getSeatByScreen(String screenId);
 	
 	
 }

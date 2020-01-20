@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.Seat;
+import com.epam.entity.SeatEntity;
 import com.epam.repository.SeatRepository;
 import com.epam.service.SeatServices;
 
@@ -16,7 +16,7 @@ public class SeatServicesImpl implements SeatServices {
 	private SeatRepository seatRepository;
 
 	@Override
-	public List<Seat> insert(List<Seat> dto) {
+	public List<SeatEntity> insert(List<SeatEntity> dto) {
 		return seatRepository.saveAll(dto);
 	}
 
@@ -27,7 +27,7 @@ public class SeatServicesImpl implements SeatServices {
 	}
 
 	@Override
-	public List<Seat> getSeatByScreen(String screenId) {
+	public List<SeatEntity> getSeatByScreen(String screenId) {
 		return seatRepository.findByScreenId(screenId);
 	}
 

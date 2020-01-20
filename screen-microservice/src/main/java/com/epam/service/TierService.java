@@ -2,12 +2,12 @@ package com.epam.service;
 
 import java.util.List;
 
-import com.epam.entity.Tier;
+import com.epam.entity.TierEntity;
 
 public interface TierService {
-	public Tier insert(Tier dto);
+	public TierEntity insert(TierEntity dto);
 
-	public Tier update(Tier dto);
+	public TierEntity update(TierEntity dto);
 
-	public List<Tier> getAllTiers();
+	public List<TierEntity> getAllTiers();
 }

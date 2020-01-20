@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epam.entity.Tier;
+import com.epam.entity.TierEntity;
 import com.epam.service.TierService;
 
 @RestController
@@ -20,17 +20,17 @@ public class TierController {
 	private TierService tiers;
 
 	@GetMapping(value = "All")
-	public List<Tier> getAllTiers() {
+	public List<TierEntity> getAllTiers() {
 		return tiers.getAllTiers();
 	}
 
 	@PostMapping(value = "/tier")
-	public Tier insert(@RequestBody Tier dto) {
+	public TierEntity insert(@RequestBody TierEntity dto) {
 		return tiers.insert(dto);
 	}
 
 	@PutMapping(value = "/tier")
-	public Tier update(@RequestBody Tier dto) {
+	public TierEntity update(@RequestBody TierEntity dto) {
 		return tiers.update(dto);
 	}
 }

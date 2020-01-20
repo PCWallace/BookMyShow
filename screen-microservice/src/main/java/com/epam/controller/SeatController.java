@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epam.entity.Seat;
+import com.epam.entity.SeatEntity;
 import com.epam.service.SeatServices;
 
 @RestController
@@ -22,12 +22,12 @@ public class SeatController {
 	private SeatServices seats;
 
 	@GetMapping(value = "/{screenId}")
-	public List<Seat> getAlSeatsBySreen(@PathVariable String screenId) {
+	public List<SeatEntity> getAlSeatsBySreen(@PathVariable String screenId) {
 		return seats.getSeatByScreen(screenId);
 	}
 
 	@PostMapping(value = "/seat")
-	public List<Seat> inserttheSeats(@RequestBody List<Seat> dto) {
+	public List<SeatEntity> inserttheSeats(@RequestBody List<SeatEntity> dto) {
 		return seats.insert(dto);
 	}
 

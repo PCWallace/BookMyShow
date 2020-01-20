@@ -2,14 +2,15 @@ package com.epam.service;
 
 import java.util.List;
 
-import com.epam.entity.Screen;
+import com.epam.dto.ScreenResponseDto;
+import com.epam.entity.ScreenEntity;
 
 public interface ScreenServices {
 
-	public Screen insert(Screen dto);
+	public ScreenEntity insert(ScreenEntity dto);
 
 	public boolean delete(String screenId);
 
-	public List<Screen> getAllScreens();
+	public List<ScreenResponseDto> getAllScreens();
 
 }

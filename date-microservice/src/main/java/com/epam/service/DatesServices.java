@@ -1,15 +1,17 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.Dates;
+import com.epam.dto.DateRequestDto;
+import com.epam.dto.DateResponseDto;
 
 public interface DatesServices {
-	public List<Dates> getAll();
+	public List<DateResponseDto> getAll();
 
-	public Dates insert(Dates dto);
+	public DateResponseDto insert(DateRequestDto dto) throws SQLException;
 
-	public Dates delete(String dateId);
+	public void delete(String dateId) throws SQLException;
 
-	public Dates getDateByDateId(String dateId);
+	public DateResponseDto getDateByDateId(String dateId) throws SQLException;
 }

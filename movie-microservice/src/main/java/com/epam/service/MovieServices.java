@@ -1,17 +1,19 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.Movie;
+import com.epam.dto.MovieRequestDto;
+import com.epam.dto.MovieResponseDto;
 
 public interface MovieServices {
-	public List<Movie> getAll();
+	public List<MovieResponseDto> getAll();
 
-	public Movie getMovieById(String movieId);
+	public MovieResponseDto getMovieById(String movieId) throws SQLException;
 
-	public Movie insert(Movie dto);
+	public MovieResponseDto insert(MovieRequestDto dto) throws SQLException;
 
-	public Movie update(String movieId);
+	public MovieResponseDto update(MovieResponseDto dto) throws SQLException;
 
-	public Movie delete(String movieId);
+	public void delete(String movieId) throws SQLException;
 }

@@ -4,16 +4,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import com.epam.dto.CityResponseDto;
 
+@Component
 public class CityListResponse {
 	private String timestamp;
 
 	private HttpStatus status;
 	private String message;
 
-	private List<CityResponseDto> citiesList;
+	private List<CityResponseDto> details;
 
 	public String getTimestamp() {
 		LocalDateTime currentTime = LocalDateTime.now();
@@ -41,12 +43,11 @@ public class CityListResponse {
 		this.message = message;
 	}
 
-	public List<CityResponseDto> getCitiesList() {
-		return citiesList;
+	public List<CityResponseDto> getDetails() {
+		return details;
 	}
 
-	public void setCitiesList(List<CityResponseDto> citiesList) {
-		this.citiesList = citiesList;
+	public void setDetails(List<CityResponseDto> details) {
+		this.details = details;
 	}
-
 }

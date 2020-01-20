@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.epam.entity.Seat;
+import com.epam.entity.SeatEntity;
 
 @Repository
-public interface SeatRepository extends JpaRepository<Seat, String> {
+public interface SeatRepository extends JpaRepository<SeatEntity, String> {
 	@Query(nativeQuery = true, value = "Select * FROM Screen join Tier on Screen.screenId = Tier.screenId join Seat on Tier.tierId = Seat.tierId where Screen.screenId=:screenId")
-	public List<Seat> findByScreenId(String screenId);
+	public List<SeatEntity> findByScreenId(String screenId);
 }

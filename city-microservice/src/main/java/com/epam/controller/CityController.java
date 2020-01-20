@@ -18,6 +18,7 @@ import com.epam.dto.CityRequestDto;
 import com.epam.dto.CityResponseDto;
 import com.epam.exception.NoContentFoundException;
 import com.epam.response.CityListResponse;
+import com.epam.response.CityResponse;
 import com.epam.response.ErrorResponse;
 import com.epam.service.CityServices;
 
@@ -31,6 +32,9 @@ public class CityController {
 	private CityListResponse cityListResponse;
 
 	@Autowired
+	private CityResponse cityResponse;
+
+	@Autowired
 	private ErrorResponse errorResponse;
 
 	@GetMapping(value = "/All")
@@ -39,14 +43,14 @@ public class CityController {
 		if (citiesList.isEmpty()) {
 			throw new NoContentFoundException("There are no city in the database");
 		}
-		cityListResponse.setCitiesList(citiesList);
+		cityListResponse.setDetails(citiesList);
 		cityListResponse.setStatus(HttpStatus.OK);
 		cityListResponse.setMessage("All the cities in the database");
 		return new ResponseEntity<>(cityListResponse, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{cityId}")
-	public ResponseEntity<CityResponseDto> getMovieById(@PathVariable String cityId)
+	public ResponseEntity<CityResponse> getMovieById(@PathVariable String cityId)
 			throws SQLException, NoContentFoundException {
 		CityResponseDto city;
 		try {
@@ -54,19 +58,25 @@ public class CityController {
 		} catch (SQLException e) {
 			throw new NoContentFoundException("No city with this Id");
 		}
-		return new ResponseEntity<>(city, HttpStatus.OK);
+		cityResponse.setDetails(city);
+		cityResponse.setStatus(HttpStatus.OK);
+		cityResponse.setMessage("City was found");
+		return new ResponseEntity<>(cityResponse, HttpStatus.OK);
 
 	}
 
 	@PostMapping(value = "/city", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public CityResponseDto register(@RequestBody CityRequestDto dto) throws SQLException {
+	public ResponseEntity<CityResponse> register(@RequestBody CityRequestDto dto) throws SQLException {
 		CityResponseDto city;
 		try {
 			city = cities.insert(dto);
 		} catch (SQLException e) {
 			throw new SQLException("Something went could not able to save");
 		}
-		return city;
+		cityResponse.setDetails(city);
+		cityResponse.setStatus(HttpStatus.OK);
+		cityResponse.setMessage("City get registered");
+		return new ResponseEntity<>(cityResponse, HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{cityId}")

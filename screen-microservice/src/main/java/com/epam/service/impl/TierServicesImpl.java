@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.Tier;
+import com.epam.entity.TierEntity;
 import com.epam.repository.TierRepository;
 import com.epam.service.TierService;
 
@@ -16,17 +16,17 @@ public class TierServicesImpl implements TierService {
 	private TierRepository tierRepository;
 
 	@Override
-	public Tier insert(Tier dto) {
+	public TierEntity insert(TierEntity dto) {
 		return tierRepository.save(dto);
 	}
 
 	@Override
-	public Tier update(Tier dto) {
+	public TierEntity update(TierEntity dto) {
 		return tierRepository.save(dto);
 	}
 
 	@Override
-	public List<Tier> getAllTiers() {
+	public List<TierEntity> getAllTiers() {
 		return tierRepository.findAll();
 	}
 
