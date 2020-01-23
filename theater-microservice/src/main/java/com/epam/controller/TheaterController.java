@@ -39,10 +39,23 @@ public class TheaterController {
 	private ErrorResponse errorResponse;
 
 	@GetMapping(value = "/All")
-	public ResponseEntity<TheaterListResponse> getAllMovies() throws NoContentFoundException {
+	public ResponseEntity<TheaterListResponse> getAllTheaters() throws NoContentFoundException {
 		List<TheaterResponseDto> theatersList = theaters.getAll();
 		if (theatersList.isEmpty()) {
 			throw new NoContentFoundException("There are no Theaters in the database");
+		}
+		theaterListResponse.setDetails(theatersList);
+		theaterListResponse.setStatus(HttpStatus.OK);
+		theaterListResponse.setMessage("All the Theaters in the database");
+		return new ResponseEntity<>(theaterListResponse, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/city/{cityId}")
+	public ResponseEntity<TheaterListResponse> getAllTheatersByCityId(@PathVariable String cityId)
+			throws NoContentFoundException {
+		List<TheaterResponseDto> theatersList = theaters.getAllTheatersByCityId(cityId);
+		if (theatersList.isEmpty()) {
+			throw new NoContentFoundException("There are no Theaters registered for this city");
 		}
 		theaterListResponse.setDetails(theatersList);
 		theaterListResponse.setStatus(HttpStatus.OK);

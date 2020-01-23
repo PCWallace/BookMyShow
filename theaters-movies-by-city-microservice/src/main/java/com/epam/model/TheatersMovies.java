@@ -2,23 +2,26 @@ package com.epam.model;
 
 import java.util.List;
 
-public class TheatersMovies {
-	List<Theater> theaters;
-	List<Movie> movies;
+import com.epam.dto.MovieResponseDto;
+import com.epam.dto.TheaterResponseDto;
 
-	public List<Theater> getTheaters() {
+public class TheatersMovies {
+	List<TheaterResponseDto> theaters;
+	List<MovieResponseDto> movies;
+
+	public List<TheaterResponseDto> getTheaters() {
 		return theaters;
 	}
 
-	public void setTheaters(List<Theater> theaters) {
+	public void setTheaters(List<TheaterResponseDto> theaters) {
 		this.theaters = theaters;
 	}
 
-	public List<Movie> getMovies() {
+	public List<MovieResponseDto> getMovies() {
 		return movies;
 	}
 
-	public void setMovies(List<Movie> movies) {
+	public void setMovies(List<MovieResponseDto> movies) {
 		this.movies = movies;
 	}
 

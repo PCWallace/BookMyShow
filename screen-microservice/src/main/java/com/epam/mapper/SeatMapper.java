@@ -13,7 +13,9 @@ import com.epam.entity.SeatEntity;
 public interface SeatMapper {
 	SeatResponseDto toSeatDto(SeatEntity seat);
 
-	List<SeatEntity> toRegisterSeatEntity(List<SeatRequestDto> seatDtoList);
+	public List<SeatEntity> toRegisterSeatEntity(List<SeatRequestDto> seatDtoList);
+
+	public List<SeatEntity> toGetRegisterSeatEntity(List<SeatResponseDto> seatDtoList);
 
 	SeatMapper MAPPER = Mappers.getMapper(SeatMapper.class);
 

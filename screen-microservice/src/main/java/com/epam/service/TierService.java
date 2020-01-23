@@ -1,13 +1,17 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.TierEntity;
+import com.epam.dto.TierRequestDto;
+import com.epam.dto.TierResponseDto;
 
 public interface TierService {
-	public TierEntity insert(TierEntity dto);
+	public TierResponseDto insert(TierRequestDto dto) throws SQLException;
 
-	public TierEntity update(TierEntity dto);
+	public TierResponseDto update(TierResponseDto dto) throws SQLException;
 
-	public List<TierEntity> getAllTiers();
+	public List<TierResponseDto> getAllTiers();
+
+	TierResponseDto getTierByTierId(String tierId) throws SQLException;
 }

@@ -18,4 +18,6 @@ public interface TheaterServices {
 	public TheaterResponseDto updateTheaterStatus(TheaterResponseDto theaterDto) throws SQLException;
 
 	public void delete(String theaterId) throws SQLException;
+
+	List<TheaterResponseDto> getAllTheatersByCityId(String cityId);
 }

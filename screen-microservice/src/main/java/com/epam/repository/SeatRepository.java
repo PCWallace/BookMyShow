@@ -12,4 +12,6 @@ import com.epam.entity.SeatEntity;
 public interface SeatRepository extends JpaRepository<SeatEntity, String> {
 	@Query(nativeQuery = true, value = "Select * FROM Screen join Tier on Screen.screenId = Tier.screenId join Seat on Tier.tierId = Seat.tierId where Screen.screenId=:screenId")
 	public List<SeatEntity> findByScreenId(String screenId);
+	
+	public SeatEntity findBySeatId(String seatId);
 }

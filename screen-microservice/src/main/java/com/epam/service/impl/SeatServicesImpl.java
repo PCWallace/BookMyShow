@@ -1,11 +1,14 @@
 package com.epam.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.entity.SeatEntity;
+import com.epam.dto.SeatRequestDto;
+import com.epam.dto.SeatResponseDto;
+import com.epam.mapper.SeatMapper;
 import com.epam.repository.SeatRepository;
 import com.epam.service.SeatServices;
 
@@ -16,19 +19,37 @@ public class SeatServicesImpl implements SeatServices {
 	private SeatRepository seatRepository;
 
 	@Override
-	public List<SeatEntity> insert(List<SeatEntity> dto) {
-		return seatRepository.saveAll(dto);
+	public List<SeatResponseDto> insert(List<SeatRequestDto> dto) throws SQLException {
+		List<SeatResponseDto> seatsList;
+		try {
+			seatsList = SeatMapper.MAPPER
+					.toSeatDtos(seatRepository.saveAll(SeatMapper.MAPPER.toRegisterSeatEntity(dto)));
+		} catch (Exception e) {
+			throw new SQLException();
+		}
+		return seatsList;
 	}
 
 	@Override
-	public boolean delteByScreenId(String screenId) {
-		seatRepository.deleteById(screenId);
-		return true;
+	public SeatResponseDto getSeatById(String seatId) throws SQLException {
+		SeatResponseDto seat = SeatMapper.MAPPER.toSeatDto(seatRepository.findBySeatId(seatId));
+		if (seat == null)
+			throw new SQLException();
+		return seat;
 	}
 
 	@Override
-	public List<SeatEntity> getSeatByScreen(String screenId) {
-		return seatRepository.findByScreenId(screenId);
+	public void delteByScreenId(List<SeatResponseDto> seats) throws SQLException {
+		try {
+			seatRepository.deleteAll(SeatMapper.MAPPER.toGetRegisterSeatEntity(seats));
+		} catch (Exception e) {
+			throw new SQLException();
+		}
+	}
+
+	@Override
+	public List<SeatResponseDto> getSeatByScreen(String screenId) {
+		return SeatMapper.MAPPER.toSeatDtos(seatRepository.findByScreenId(screenId));
 	}
 
 }

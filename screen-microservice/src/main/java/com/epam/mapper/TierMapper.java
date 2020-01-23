@@ -7,12 +7,11 @@ import org.mapstruct.factory.Mappers;
 
 import com.epam.dto.TierRequestDto;
 import com.epam.dto.TierResponseDto;
-import com.epam.entity.ScreenEntity;
 import com.epam.entity.TierEntity;
 
 @Mapper
 public interface TierMapper {
-	TierResponseDto toTierDto(ScreenEntity tier);
+	TierResponseDto toTierDto(TierEntity tier);
 
 	List<TierEntity> toRegisterTierEntity(List<TierRequestDto> tierDtoList);
 
@@ -20,7 +19,7 @@ public interface TierMapper {
 
 	List<TierResponseDto> toTierDtos(List<TierEntity> tierEntityList);
 
-	ScreenEntity toTierEntity(TierRequestDto tier);
+	TierEntity toTierEntity(TierRequestDto tier);
 
-	ScreenEntity toTierEntity(TierResponseDto tier);
+	TierEntity toTierEntity(TierResponseDto tier);
 }

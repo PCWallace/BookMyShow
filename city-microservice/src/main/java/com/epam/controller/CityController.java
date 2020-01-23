@@ -38,7 +38,7 @@ public class CityController {
 	private ErrorResponse errorResponse;
 
 	@GetMapping(value = "/All")
-	public ResponseEntity<CityListResponse> getAllMovies() throws NoContentFoundException {
+	public ResponseEntity<CityListResponse> getAllCities() throws NoContentFoundException {
 		List<CityResponseDto> citiesList = cities.getAll();
 		if (citiesList.isEmpty()) {
 			throw new NoContentFoundException("There are no city in the database");

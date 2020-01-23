@@ -22,6 +22,11 @@ public class TheaterServicesImpl implements TheaterServices {
 	public List<TheaterResponseDto> getAll() {
 		return TheaterMapper.MAPPER.toTheaterDtos(theaterRepository.findAll());
 	}
+	
+	@Override
+	public List<TheaterResponseDto> getAllTheatersByCityId(String cityId) {
+		return TheaterMapper.MAPPER.toTheaterDtos(theaterRepository.findByCityId(cityId));
+	}
 
 	@Override
 	public TheaterResponseDto getTheaterById(String theaterId) throws SQLException {

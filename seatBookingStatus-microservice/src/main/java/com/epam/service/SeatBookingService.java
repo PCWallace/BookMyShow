@@ -1,17 +1,22 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.SeatBookingStatus;
+import com.epam.dto.SeatBookingStatusRequestDto;
+import com.epam.dto.SeatBookingStatusResponseDto;
+import com.epam.entity.SeatBookingStatusEntity;
 
 public interface SeatBookingService {
-	public List<SeatBookingStatus> getSeatBookingStatus(String showId);
+	public List<SeatBookingStatusResponseDto> getSeatBookingStatus(String showId);
 
-	public List<SeatBookingStatus> insert(List<SeatBookingStatus> dto);
+	public List<SeatBookingStatusResponseDto> insert(List<SeatBookingStatusRequestDto> dto) throws SQLException;
 	
-	public List<SeatBookingStatus> update(List<SeatBookingStatus> dto);
+	public List<SeatBookingStatusResponseDto> update(List<SeatBookingStatusResponseDto> dto) throws SQLException;
 	
-	public SeatBookingStatus getBySeatAndShowId(String seatId, String showId);
+	public SeatBookingStatusEntity getBySeatAndShowId(String seatId, String showId);
 	
-	public List<SeatBookingStatus> getAll();
+	public List<SeatBookingStatusResponseDto> getAll();
+
+	public SeatBookingStatusResponseDto getSeatBookingStatusBySeatBookingStatusId(String seatBookingStatusId) throws SQLException;
 }

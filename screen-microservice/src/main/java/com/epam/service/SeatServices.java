@@ -1,15 +1,18 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.SeatEntity;
+import com.epam.dto.SeatRequestDto;
+import com.epam.dto.SeatResponseDto;
 
 public interface SeatServices {
-	public List<SeatEntity> insert(List<SeatEntity> dto);
+	public List<SeatResponseDto> insert(List<SeatRequestDto> dto) throws SQLException;
 
-	public boolean delteByScreenId(String screenId);
-	
-	public List<SeatEntity> getSeatByScreen(String screenId);
-	
-	
+	public List<SeatResponseDto> getSeatByScreen(String screenId);
+
+	public SeatResponseDto getSeatById(String seatId) throws SQLException;
+
+	public void delteByScreenId(List<SeatResponseDto> seats) throws SQLException;
+
 }

@@ -1,15 +1,19 @@
 package com.epam.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import com.epam.entity.Shows;
+import com.epam.dto.ShowRequestDto;
+import com.epam.dto.ShowResponseDto;
 
 public interface ShowsServices {
-	public List<Shows> getAll();
+	public List<ShowResponseDto> getAll();
 
-	public Shows getShowById(String showId);
+	public ShowResponseDto getShowById(String showId) throws SQLException;
 
-	public List<Shows> insertAll(List<Shows> showsDto);
+	public void delete(String theaterId) throws SQLException;
 
-	public Shows delete(String theaterId);
+	List<ShowResponseDto> insertAll(List<ShowRequestDto> showsDto) throws SQLException;
+
+	List<ShowResponseDto> getAllShowsByScreenId(String screenId);
 }
