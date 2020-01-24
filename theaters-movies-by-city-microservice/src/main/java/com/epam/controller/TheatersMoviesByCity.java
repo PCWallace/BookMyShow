@@ -1,7 +1,9 @@
 package com.epam.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,29 +40,33 @@ public class TheatersMoviesByCity {
 
 		ResponseEntity<TheaterListResponse> theaterResponse = restTemplate
 				.getForEntity("http://theater-microservice/city/" + cityId, TheaterListResponse.class);
-		ResponseEntity<ScreenListResponse> screenListResponse = null;
-		for (TheaterResponseDto currentTheater : theaterResponse.getBody().getDetails()) {
-			screenListResponse = restTemplate.getForEntity(
-					"http://screen-microservice/theater/" + currentTheater.getTheaterId(), ScreenListResponse.class);
-		}
-		ResponseEntity<ShowListResponse> showsResponse = null;
-		for (ScreenResponseDto currentScreen : screenListResponse.getBody().getDetails()) {
-			showsResponse = restTemplate.getForEntity("http://shows-microservice/screen/" + currentScreen.getScreenId(),
-					ShowListResponse.class);
-		}
+		List<ScreenResponseDto> allScreensInCity = new ArrayList<>();
 
-		List<MovieResponseDto> movies = new ArrayList<>();
-		for (ShowResponseDto currentShow : showsResponse.getBody().getDetails()) {
+		for (TheaterResponseDto currentTheater : theaterResponse.getBody().getDetails()) {
+			ResponseEntity<ScreenListResponse> screenListResponse = restTemplate.getForEntity(
+					"http://screen-microservice/theater/" + currentTheater.getTheaterId(), ScreenListResponse.class);
+			allScreensInCity.addAll(screenListResponse.getBody().getDetails());
+		}
+		List<ShowResponseDto> allShowsInCity = new ArrayList<>();
+
+		for (ScreenResponseDto currentScreen : allScreensInCity) {
+			ResponseEntity<ShowListResponse> showsResponse = restTemplate.getForEntity(
+					"http://shows-microservice/screen/" + currentScreen.getScreenId(), ShowListResponse.class);
+			allShowsInCity.addAll(showsResponse.getBody().getDetails());
+		}
+		Set<MovieResponseDto> movies = new HashSet<>();
+		for (ShowResponseDto currentShow : allShowsInCity) {
 			ResponseEntity<MovieResponse> movieResponse = restTemplate
 					.getForEntity("http://movies-microservice/" + currentShow.getMovieId(), MovieResponse.class);
 			movies.add(movieResponse.getBody().getDetails());
 		}
-		theatersMoviesDto.setMovies(movies);
+		List<MovieResponseDto> allMoviesInCity = new ArrayList<>(movies);
+		theatersMoviesDto.setMovies(allMoviesInCity);
 		theatersMoviesDto.setTheaters(theaterResponse.getBody().getDetails());
 		theaterMovieByCityResponse.setDetails(theatersMoviesDto);
 		theaterMovieByCityResponse.setMessage("All the movies and the theaters of the city");
 		theaterMovieByCityResponse.setStatus(HttpStatus.OK);
 		return new ResponseEntity<>(theaterMovieByCityResponse, HttpStatus.OK);
-
 	}
+
 }
