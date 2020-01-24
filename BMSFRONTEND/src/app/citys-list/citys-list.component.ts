@@ -12,6 +12,9 @@ export class CitysListComponent implements OnInit {
     title = 'BMSFRONTEND';
     cities: City[];
     showForm = false;
+    theaters:[any] ;
+    movies:[any];
+    show=false;
     cityId: string;
     constructor(private service: CityService, private router: Router) {}
 
@@ -20,15 +23,18 @@ export class CitysListComponent implements OnInit {
     }
 
     getAllCities() {
-        console.log('hi');
-        this.service.getAllCities().subscribe(data => {
-            this.cities = data;
-            console.log(data);
+        this.service.getAllCities().subscribe(res => {
+            console.log(res.body.details);
+            this.cities = res.body.details;
         });
     }
-
-    registerTheatreId(id: string) {
-        // console.log(id);
-        this.cityId = id;
+    getMovie_Theatre(id:string){
+        this.service.getMovie_Theatre(id).subscribe(res=>{
+            console.log(res.body.details);
+            this.theaters = res.body.details.theaters;
+            this.movies = res.body.details.movies;
+            this.show =true;
+        })
     }
+
 }

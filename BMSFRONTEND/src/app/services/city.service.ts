@@ -17,10 +17,16 @@ export class CityService {
         const header = new HttpHeaders({
             Authorization: localStorage.getItem('tokken')
         });
-        return this.http.get<City[]>('api/cities/All', { headers: header });
+        return this.http.get<ServerResponse>('api/cities/All', { headers: header , observe: 'response'});
     }
 
-    getAllTheatersForCity(id: string) {
-        return this.http.get<Theater[]>(`api/theaters/${id}`);
+    getMovie_Theatre(id:string){
+        const header = new HttpHeaders({
+            Authorization: localStorage.getItem('tokken')
+        });
+        return this.http.get<ServerResponse>(`api/tmbc/${id}`, { headers: header , observe: 'response'});
     }
+    // getAllTheatersForCity(id: string) {
+    //     return this.http.get<ServerResponse>(`api/theaters/${id}`);
+    // }
 }

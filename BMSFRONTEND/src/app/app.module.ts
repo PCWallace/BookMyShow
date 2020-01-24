@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CookieService } from 'ngx-cookie-service';
 import { RegistertheaterformComponent } from './registertheaterform/registertheaterform.component';
+import { CityMovieTheatreDataComponent } from './city-movie-theatre-data/city-movie-theatre-data.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { RegistertheaterformComponent } from './registertheaterform/registerthea
         TheaterviewComponent,
         DateviewComponent,
         PlacedorderviewComponent,
-        RegistertheaterformComponent
+        RegistertheaterformComponent,
+        CityMovieTheatreDataComponent
     ],
     imports: [
         BrowserModule,

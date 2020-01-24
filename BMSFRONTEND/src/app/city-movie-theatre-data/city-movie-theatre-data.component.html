@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6 h4 border bg-light text-center py-2">
+            Movies
+        </div>
+        <div class="col-6 h4 border bg-light text-center py-2">
+            Theaters
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-center">
+            <span *ngFor="let movie of movies" class="badge badge-pill badge-info m-2 p-2" style="cursor: pointer">
+                <span class="h6">{{movie.movieName}}</span>
+            </span>
+    </div>
+    <div class="col-6 text-center">
+            <span *ngFor="let theater of theaters" class="badge badge-pill badge-info m-2 p-2" style="cursor: pointer">
+                <span  class="h6">{{theater.theaterName}}</span>
+            </span>
+        </div>
+    </div>
+</div>
