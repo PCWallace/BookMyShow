@@ -33,6 +33,19 @@ public class SeatController {
 
 	@Autowired
 	private ErrorResponse errorResponse;
+	
+	@GetMapping(value = "/All")
+	public ResponseEntity<SeatListResponse> getAlSeats()
+			throws NoContentFoundException {
+		List<SeatResponseDto> seatsList = seats.getAllSeats();
+		if (seatsList.isEmpty()) {
+			throw new NoContentFoundException("There are no seats in the database for this screen");
+		}
+		seatListResponse.setDetails(seatsList);
+		seatListResponse.setStatus(HttpStatus.OK);
+		seatListResponse.setMessage("All the seats in the screen");
+		return new ResponseEntity<>(seatListResponse, HttpStatus.OK);
+	}
 
 	@GetMapping(value = "/{screenId}")
 	public ResponseEntity<SeatListResponse> getAlSeatsBySreen(@PathVariable String screenId)

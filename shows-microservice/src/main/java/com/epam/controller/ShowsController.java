@@ -49,7 +49,7 @@ public class ShowsController {
 		return new ResponseEntity<>(showListResponse, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/screen/{screenId")
+	@GetMapping(value = "/screen/{screenId}")
 	public ResponseEntity<ShowListResponse> getAllShowsByScreenId(@PathVariable String screenId)
 			throws NoContentFoundException {
 		List<ShowResponseDto> showsList = showsServices.getAllShowsByScreenId(screenId);

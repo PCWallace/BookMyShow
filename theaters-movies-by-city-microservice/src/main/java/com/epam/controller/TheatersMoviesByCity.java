@@ -35,7 +35,7 @@ public class TheatersMoviesByCity {
 	@Autowired
 	private TheatersMoviesDto theatersMoviesDto;
 
-	@GetMapping(value = "/tmbc/{cityId}")
+	@GetMapping(value = "/{cityId}")
 	public ResponseEntity<TheaterMovieByCityResponse> getTheatersMoviesByCity(@PathVariable String cityId) {
 
 		ResponseEntity<TheaterListResponse> theaterResponse = restTemplate
@@ -60,6 +60,7 @@ public class TheatersMoviesByCity {
 					.getForEntity("http://movies-microservice/" + currentShow.getMovieId(), MovieResponse.class);
 			movies.add(movieResponse.getBody().getDetails());
 		}
+
 		List<MovieResponseDto> allMoviesInCity = new ArrayList<>(movies);
 		theatersMoviesDto.setMovies(allMoviesInCity);
 		theatersMoviesDto.setTheaters(theaterResponse.getBody().getDetails());

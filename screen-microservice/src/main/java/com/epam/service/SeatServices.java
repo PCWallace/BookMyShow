@@ -15,4 +15,6 @@ public interface SeatServices {
 
 	public void delteByScreenId(List<SeatResponseDto> seats) throws SQLException;
 
+	public List<SeatResponseDto> getAllSeats();
+
 }

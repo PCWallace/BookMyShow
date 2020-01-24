@@ -52,4 +52,9 @@ public class SeatServicesImpl implements SeatServices {
 		return SeatMapper.MAPPER.toSeatDtos(seatRepository.findByScreenId(screenId));
 	}
 
+	@Override
+	public List<SeatResponseDto> getAllSeats() {
+		return SeatMapper.MAPPER.toSeatDtos(seatRepository.findAll());
+	}
+
 }

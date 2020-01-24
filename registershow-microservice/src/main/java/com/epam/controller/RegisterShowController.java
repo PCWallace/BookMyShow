@@ -39,20 +39,16 @@ public class RegisterShowController {
 		List<SeatBookingStatusRequestDto> seatBookingstatusRequest = new ArrayList<>();
 		for (ShowResponseDto currentShowRequest : showResponse.getBody().getDetails()) {
 			if (screenIdMap.containsKey(currentShowRequest.getScreenId())) {
-				for (SeatResponseDto currentSeat : screenIdMap.get(currentShowRequest.getScreenId())) {
-					SeatBookingStatusRequestDto seatRequest = new SeatBookingStatusRequestDto();
-					seatRequest.setSeatId(currentSeat.getSeatId());
-					seatRequest.setShowId(currentShowRequest.getShowId());
-					seatRequest.setStatus(1);
-					seatBookingstatusRequest.add(seatRequest);
-				}
+				setValuesSeatBookingRequestDto(seatBookingstatusRequest,
+						screenIdMap.get(currentShowRequest.getScreenId()), currentShowRequest.getShowId());
 			} else {
 				ResponseEntity<SeatListResponse> seatListResponse = restTemplate.getForEntity(
 						"http://screen-microservice/seats/" + currentShowRequest.getScreenId(), SeatListResponse.class);
 				screenIdMap.put(currentShowRequest.getScreenId(), seatListResponse.getBody().getDetails());
+				setValuesSeatBookingRequestDto(seatBookingstatusRequest,
+						screenIdMap.get(currentShowRequest.getScreenId()), currentShowRequest.getShowId());
 			}
 		}
-
 		ResponseEntity<SeatBookingStatusListResponse> seatBookingResponse = restTemplate.postForEntity(
 				"http://seatbookingstatus-microservice/seats", seatBookingstatusRequest,
 				SeatBookingStatusListResponse.class);
@@ -62,6 +58,17 @@ public class RegisterShowController {
 			errorResponse.setStatus(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(errorResponse, HttpStatus.OK);
+	}
+
+	public void setValuesSeatBookingRequestDto(List<SeatBookingStatusRequestDto> seatBookingstatusRequest,
+			List<SeatResponseDto> seatsList, String showId) {
+		for (SeatResponseDto currentSeat : seatsList) {
+			SeatBookingStatusRequestDto seatRequest = new SeatBookingStatusRequestDto();
+			seatRequest.setSeatId(currentSeat.getSeatId());
+			seatRequest.setShowId(showId);
+			seatRequest.setStatus(1);
+			seatBookingstatusRequest.add(seatRequest);
+		}
 	}
 
 }

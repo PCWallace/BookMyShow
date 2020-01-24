@@ -2,12 +2,14 @@ package com.epam.mapper;
 
 import java.util.List;
 
+import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import com.epam.dto.ShowRequestDto;
 import com.epam.dto.ShowResponseDto;
 import com.epam.entity.ShowsEntity;
 
+@Mapper
 public interface ShowMapper {
 	public ShowResponseDto toShowDto(ShowsEntity show);
 
