@@ -16,4 +16,8 @@ public interface ShowsServices {
 	List<ShowResponseDto> insertAll(List<ShowRequestDto> showsDto) throws SQLException;
 
 	List<ShowResponseDto> getAllShowsByScreenId(String screenId);
+
+	public List<ShowResponseDto> getAllShowsByMovieId(String movieId);
+
+	public List<ShowResponseDto> getAllShowsByScreenIdAndDateId(String screenId, String dateId);
 }

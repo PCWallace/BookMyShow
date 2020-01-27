@@ -1,12 +1,6 @@
-package com.epam.model;
+package com.epam.dto;
 
-import java.util.UUID;
-
-import org.springframework.stereotype.Component;
-
-@Component
-
-public class Shows {
+public class ShowResponseDto {
 
 	private String showId;
 
@@ -50,22 +44,18 @@ public class Shows {
 		this.screenId = screenId;
 	}
 
-	public Shows() {
-		this.showId = UUID.randomUUID().toString();
-	}
-
-	@Override
-	public String toString() {
-		return "Shows [showId=" + showId + ", dateId=" + dateId + ", movieId=" + movieId + ", screenId=" + screenId
-				+ ", showTiming=" + showTiming + "]";
-	}
-
 	public String getShowTiming() {
 		return showTiming;
 	}
 
 	public void setShowTiming(String showTiming) {
 		this.showTiming = showTiming;
+	}
+
+	@Override
+	public String toString() {
+		return "ShowResponseDto [showId=" + showId + ", dateId=" + dateId + ", movieId=" + movieId + ", screenId="
+				+ screenId + ", showTiming=" + showTiming + "]";
 	}
 
 }

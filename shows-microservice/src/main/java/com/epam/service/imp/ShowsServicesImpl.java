@@ -22,7 +22,7 @@ public class ShowsServicesImpl implements ShowsServices {
 	public List<ShowResponseDto> getAll() {
 		return ShowMapper.MAPPER.toShowDtos(showsRepository.findAll());
 	}
-	
+
 	@Override
 	public List<ShowResponseDto> getAllShowsByScreenId(String screenId) {
 		return ShowMapper.MAPPER.toShowDtos(showsRepository.findByScreenId(screenId));
@@ -55,6 +55,16 @@ public class ShowsServicesImpl implements ShowsServices {
 			throw new SQLException();
 		}
 		return shows;
+	}
+
+	@Override
+	public List<ShowResponseDto> getAllShowsByMovieId(String movieId) {
+		return ShowMapper.MAPPER.toShowDtos(showsRepository.findByMovieId(movieId));
+	}
+
+	@Override
+	public List<ShowResponseDto> getAllShowsByScreenIdAndDateId(String screenId, String dateId) {
+		return ShowMapper.MAPPER.toShowDtos(showsRepository.findByScreenIdAndDateId(screenId, dateId));
 	}
 
 }

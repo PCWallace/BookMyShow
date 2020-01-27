@@ -62,6 +62,32 @@ public class ShowsController {
 		return new ResponseEntity<>(showListResponse, HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/movie/{movieId}")
+	public ResponseEntity<ShowListResponse> getAllShowsByMovieId(@PathVariable String movieId)
+			throws NoContentFoundException {
+		List<ShowResponseDto> showsList = showsServices.getAllShowsByMovieId(movieId);
+		if (showsList.isEmpty()) {
+			throw new NoContentFoundException("There are no shows in the database");
+		}
+		showListResponse.setDetails(showsList);
+		showListResponse.setStatus(HttpStatus.OK);
+		showListResponse.setMessage("All the cities in the database");
+		return new ResponseEntity<>(showListResponse, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/showsbydatescreen/{screenId}/{dateId}")
+	public ResponseEntity<ShowListResponse> getAllShowsByScreenIdAndDateId(@PathVariable String screenId,
+			@PathVariable String dateId) throws NoContentFoundException {
+		List<ShowResponseDto> showsList = showsServices.getAllShowsByScreenIdAndDateId(screenId, dateId);
+		if (showsList.isEmpty()) {
+			throw new NoContentFoundException("There are no shows in the database");
+		}
+		showListResponse.setDetails(showsList);
+		showListResponse.setStatus(HttpStatus.OK);
+		showListResponse.setMessage("All the cities in the database");
+		return new ResponseEntity<>(showListResponse, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "{/showId}")
 	public ResponseEntity<ShowResponse> getSowsByShowId(@PathVariable String showId) throws NoContentFoundException {
 		ShowResponseDto show;
