@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { City } from 'src/model/City';
+import { City } from 'src/app/model/City';
 import { Router } from '@angular/router';
-import { CityService } from '../services/city.service';
+import { CityService } from '../../services/city.service';
 
 @Component({
     selector: 'app-citys-list',
@@ -28,6 +28,8 @@ export class CitysListComponent implements OnInit {
             this.cities = res.body.details;
         });
     }
+
+    
     getMovie_Theatre(id:string){
         this.service.getMovie_Theatre(id).subscribe(res=>{
             console.log(res.body.details);

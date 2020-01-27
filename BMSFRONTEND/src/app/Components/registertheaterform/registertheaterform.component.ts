@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { RegistertheaterformService } from '../services/registertheaterform.service';
+import { RegistertheaterformService } from '../../services/registertheaterform.service';
 
 @Component({
     selector: 'app-registertheaterform',

@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { City } from 'src/model/City';
-import { Theater } from 'src/model/Theater';
+import { City } from 'src/app/model/City';
+import { Theater } from 'src/app/model/Theater';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CityService {
     cities: City[];
-
+    
     constructor(public http: HttpClient) {
         this.cities = [];
     }
-
+    
+    getAllDates() {
+        const header = new HttpHeaders({
+            Authorization: localStorage.getItem('tokken')
+        });
+        return this.http.get<ServerResponse>('api/dates/All', { headers: header , observe: 'response'});
+    }
     getAllCities() {
         const header = new HttpHeaders({
             Authorization: localStorage.getItem('tokken')
